@@ -90,8 +90,8 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'CHC001',
-        'HOST': 'c-cosmos-coherence-dev-eastus-003.khpfie4mhhiiqh.postgres.cosmos.azure.com',
+        'NAME': 'citus',
+        'HOST': 'c-cosmos-coherence-dev-eastus-004.csk4uypxzdkjxj.postgres.cosmos.azure.com',
         'USER': 'citus',
         'PASSWORD': '@CHC@2805@'
     }

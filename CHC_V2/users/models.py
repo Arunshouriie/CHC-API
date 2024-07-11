@@ -33,13 +33,13 @@ class Users(models.Model):
 
 class Medicines(models.Model):
     name = models.CharField(max_length=100)
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return self.name
 
 class userinfo(models.Model):
-    patient_id = models.ForeignKey('Users',blank=True, null=True, on_delete=models.CASCADE)
+    patient_id = models.IntegerField()
     # uuid = models.ForeignKey('User', on_delete=models.CASCADE)
     name = models.CharField(max_length=50, blank=True, null=True)
     dob = models.DateField(max_length=8, blank=True, null=True)
@@ -60,7 +60,7 @@ class userinfo(models.Model):
     clinician_pic = models.ImageField(upload_to = 'images/', blank=True, default= "")
     diagnosis = models.CharField(max_length=250, blank=True, null=True, default= "")
     allergies = models.CharField(max_length=50, blank=True, null=True, default= "")
-    medicine_name = models.ForeignKey(Medicines, on_delete=models.CASCADE)
+    medicine_name = models.CharField(max_length=50,  blank=True, null=True, default= "")
     medicine_pic = models.ImageField(upload_to = 'images/', default= "", blank=True)
     dose_duration = models.IntegerField(default=-1)
     dose_per_day = models.IntegerField(default=-1)
@@ -78,7 +78,7 @@ class userinfo(models.Model):
         return self.name
 
 class SideEffect(models.Model):
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user = models.CharField(max_length=255)
     entry_time = models.DateTimeField(auto_now_add=True)
     side_effect = models.CharField(max_length=255)
 
@@ -87,7 +87,7 @@ class SideEffect(models.Model):
 
 
 class Provisioning(models.Model):
-    user_id = models.ForeignKey('Users', on_delete=models.CASCADE)
+    user_id = models.IntegerField()
     mac_id = models.CharField(max_length=25)
     public_ip = models.CharField(max_length=25)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
@@ -168,7 +168,8 @@ class Dispense_Log(models.Model):
         verbose_name_plural = "medicines"
     
 class Points(models.Model):
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    # user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user = models.CharField(max_length=255)
     points = models.FloatField()
     dispense_log = models.OneToOneField(Dispense_Log, on_delete=models.CASCADE)
 
